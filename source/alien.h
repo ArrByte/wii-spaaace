@@ -13,6 +13,9 @@ class Alien : public wsp::Sprite {
 		short motionY;
 		void resetMotion();
 		void resetPosition();
+		
+		static const int MAX_OFFSCREEN_OFFSET;
+		static const int LOCK_MOTION_FRAME_COUNT;
 };
 
 #endif

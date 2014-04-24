@@ -18,9 +18,12 @@ void Alien::update() {
 void Alien::resetMotion() {
 	motionX = -2;
 	motionY = rand()%10 - 5;	
-	lockMotionFrames = 100;
+	lockMotionFrames = Alien::LOCK_MOTION_FRAME_COUNT;
 }
 
 void Alien::resetPosition() {
-	SetPosition(640 + (rand()%500), rand() % (480-GetHeight()));
+	SetPosition(640 + (rand()%Alien::MAX_OFFSCREEN_OFFSET), rand() % (480-GetHeight()));
 }
+
+const int Alien::MAX_OFFSCREEN_OFFSET 		= 640;
+const int Alien::LOCK_MOTION_FRAME_COUNT 	= 100;
