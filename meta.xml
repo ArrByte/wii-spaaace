@@ -2,7 +2,7 @@
   <app version="1">
     <name>Spaaace</name>
     <coder>Geekonaut</coder>
-    <version>0.1</version>
+    <version>0.3</version>
     <release_date>2014</release_date>
     <short_description>pew Pew PEW PEW!</short_description>
     <long_description>Side-scrolling space arcade shooter</long_description>
