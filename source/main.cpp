@@ -1,12 +1,11 @@
-#include "global.h"
 #include "player.h"
 #include "alien.h"
+#include "global.h"
 
 using namespace wsp;
 
 Player players[NUM_PLAYERS];
 Alien *aliens[NUM_ALIENS];
-
 
 void initBoundaries() {
     bounds.left.SetPosition(-1, 0);
@@ -52,7 +51,6 @@ int main(int argc, char **argv) {
     gwd.SetBackground((GXColor){ 0, 0, 0, 255 });
  
     fatInitDefault();
-    
     WPAD_Init();
 
     loadPlayerSprites();
@@ -71,7 +69,7 @@ int main(int argc, char **argv) {
 
         for(i=0;i<NUM_PLAYERS;i++) {
             u32 pressed = WPAD_ButtonsHeld(i);
-            players[i].update(pressed);
+            players[i].update(pressed, (wsp::Sprite **)aliens);
         }
 
         manager.Draw(0,0);
