@@ -1,3 +1,4 @@
 *.elf
 *.log
 build
+*.swp
