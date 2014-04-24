@@ -8,24 +8,16 @@
 #include <wiisprite.h>
 #include <fat.h>
 
-using namespace wsp;
-
 typedef struct {
-    int x;
-    int y;
-} position_t;
-
-typedef struct {
-    Quad left;
-    Quad top;
-    Quad right;
-    Quad bottom;
+    wsp::Quad left;
+    wsp::Quad top;
+    wsp::Quad right;
+    wsp::Quad bottom;
 } bounds_t;
 
-GameWindow      gwd;
-Image           imgPlayer[2];
-Sprite          player[2];
-LayerManager    manager(100);
-bounds_t	    bounds;
+extern wsp::GameWindow     gwd;
+extern wsp::Image          imgPlayers[2];
+extern wsp::LayerManager   manager;
+extern bounds_t	    	   bounds;
 
 #endif
