@@ -5,7 +5,7 @@
 
 class Player : public wsp::Sprite {
 	public:
-		void update(u32 buttonsHeld);
+		void update(u32 buttonsHeld, wsp::Sprite **enemies);
 };
 
 #endif
