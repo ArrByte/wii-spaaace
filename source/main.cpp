@@ -1,9 +1,11 @@
 #include "global.h"
 #include "player.h"
+#include "alien.h"
 
 using namespace wsp;
 
-Player players[2];
+Player players[NUM_PLAYERS];
+Alien *aliens[NUM_ALIENS];
 
 
 void initBoundaries() {
@@ -27,13 +29,23 @@ void initBoundaries() {
 void loadPlayerSprites() {
     const char *imgPaths[2] = { "/apps/Spaaace/images/ship.png", "/apps/Spaaace/images/ship2.png" };
     int i;
-    for(i=0;i<2;i++) { 
+    for(i=0;i<NUM_PLAYERS;i++) { 
         if(imgPlayers[i].LoadImage(imgPaths[i]) != IMG_LOAD_ERROR_NONE) exit(1);
         players[i].SetImage(&imgPlayers[i]);
         players[i].SetPosition(100, 100);
         manager.Append(&players[i]);
     }
 }
+
+void initAliens(unsigned int maxAliens) {
+	if(imgAliens[0].LoadImage("/apps/Spaaace/images/alien3.png") != IMG_LOAD_ERROR_NONE) exit(1);
+	int i;
+	for(i=0;i<maxAliens;i++) {
+		aliens[i] = new Alien(&imgAliens[0]);
+		manager.Append(aliens[i]);
+	}
+}
+
 
 int main(int argc, char **argv) {
     gwd.InitVideo();
@@ -45,6 +57,7 @@ int main(int argc, char **argv) {
 
     loadPlayerSprites();
     initBoundaries();
+	initAliens(NUM_ALIENS);
 
     while(true) {
         WPAD_ScanPads();
@@ -52,7 +65,11 @@ int main(int argc, char **argv) {
         if(WPAD_ButtonsDown(WPAD_CHAN_0) & WPAD_BUTTON_HOME) break;
         int i;
 
-        for(i=0;i<2;i++) {
+		for(i=0;i<NUM_ALIENS;i++) {
+			aliens[i]->update();
+		}
+
+        for(i=0;i<NUM_PLAYERS;i++) {
             u32 pressed = WPAD_ButtonsHeld(i);
             players[i].update(pressed);
         }
