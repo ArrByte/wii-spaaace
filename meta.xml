@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+  <app version="1">
+    <name>Spaaace</name>
+    <coder>Geekonaut</coder>
+    <version>0.1</version>
+    <release_date>2014</release_date>
+    <short_description>pew Pew PEW PEW!</short_description>
+    <long_description>Side-scrolling space arcade shooter</long_description>
+  </app>
