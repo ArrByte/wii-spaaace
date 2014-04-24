@@ -1,6 +1,10 @@
 #include "global.h"
+#include "player.h"
 
 using namespace wsp;
+
+Player players[2];
+
 
 void initBoundaries() {
     bounds.left.SetPosition(-1, 0);
@@ -24,10 +28,10 @@ void loadPlayerSprites() {
     const char *imgPaths[2] = { "/apps/Spaaace/images/ship.png", "/apps/Spaaace/images/ship2.png" };
     int i;
     for(i=0;i<2;i++) { 
-        if(imgPlayer[i].LoadImage(imgPaths[i]) != IMG_LOAD_ERROR_NONE) exit(1);
-        player[i].SetImage(&imgPlayer[i]);
-        player[i].SetPosition(100, 100);
-        manager.Append(&player[i]);
+        if(imgPlayers[i].LoadImage(imgPaths[i]) != IMG_LOAD_ERROR_NONE) exit(1);
+        players[i].SetImage(&imgPlayers[i]);
+        players[i].SetPosition(100, 100);
+        manager.Append(&players[i]);
     }
 }
 
@@ -42,14 +46,6 @@ int main(int argc, char **argv) {
     loadPlayerSprites();
     initBoundaries();
 
-    position_t playerPos[2];
-    playerPos[0].x =  50;
-    playerPos[0].y = 100;
-
-    playerPos[1].x =  50;
-    playerPos[1].y = 200;
-
-
     while(true) {
         WPAD_ScanPads();
 
@@ -57,26 +53,8 @@ int main(int argc, char **argv) {
         int i;
 
         for(i=0;i<2;i++) {
-            u32 pressed = WPAD_ButtonsHeld(i); 
-            if(pressed & WPAD_BUTTON_RIGHT && !player[i].CollidesWith(bounds.top.GetRectangle())) {
-                playerPos[i].y -= 5;
-            } else if(pressed & WPAD_BUTTON_LEFT 
-                    && !player[i].CollidesWith(bounds.bottom.GetRectangle())) {
-                playerPos[i].y += 5;
-            }
-
-            if(pressed & WPAD_BUTTON_UP && !player[i].CollidesWith(bounds.left.GetRectangle())) {
-                playerPos[i].x -= 2;
-            } else if(pressed & WPAD_BUTTON_DOWN 
-                    && !player[i].CollidesWith(bounds.right.GetRectangle())) {
-                playerPos[i].x += 2;
-            }
-
-            if(pressed & WPAD_BUTTON_2) {
-                //Shoot?
-            }
-
-            player[i].SetPosition(playerPos[i].x, playerPos[i].y);
+            u32 pressed = WPAD_ButtonsHeld(i);
+            players[i].update(pressed);
         }
 
         manager.Draw(0,0);
