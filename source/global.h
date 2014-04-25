@@ -24,6 +24,7 @@ typedef struct {
 extern wsp::GameWindow     gwd;
 extern wsp::Image          imgPlayers[NUM_PLAYERS];
 extern wsp::Image          imgAliens[NUM_ALIEN_TYPES];
+extern wsp::Image		   imgBgs[NUM_SPACE_BGS];
 extern wsp::LayerManager   manager;
 extern wsp::LayerManager   bgManager;
 extern bounds_t	    	   bounds;

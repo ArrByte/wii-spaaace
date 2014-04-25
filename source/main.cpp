@@ -6,14 +6,14 @@ using namespace wsp;
 
 Player players[NUM_PLAYERS];
 Alien *aliens[NUM_ALIENS];
+wsp::Sprite bgs[NUM_SPACE_BGS];
 
 void initBackgrounds()
 {
-	wsp::Image imgBg;
-	wsp::Sprite bg;
-	if(imgBg.LoadImage("/apps/Spaaace/images/space1.png") != IMG_LOAD_ERROR_NONE) exit(1);
-	bg.SetImage(&imgBg);
-	bgManager.Append(&bg);
+	if(imgBgs[0].LoadImage("/apps/Spaaace/images/space1.png") != IMG_LOAD_ERROR_NONE) exit(1);
+	bgs[0].SetImage(&imgBgs[0]);
+	bgs[0].SetPosition(0, 0);
+	manager.Append(&bgs[0]);
 }
 
 void initBoundaries() {
@@ -65,6 +65,7 @@ int main(int argc, char **argv) {
     loadPlayerSprites();
     initBoundaries();
 	initAliens(NUM_ALIENS);
+    initBackgrounds();
 
     while(true) {
         WPAD_ScanPads();
@@ -81,7 +82,6 @@ int main(int argc, char **argv) {
             players[i].update(pressed, (wsp::Sprite **)aliens);
         }
 
-		bgManager.Draw(0,0);
         manager.Draw(0,0);
         gwd.Flush();
     }
