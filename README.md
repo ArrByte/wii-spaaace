@@ -22,5 +22,21 @@ Right now this project doesn't have a contribution workflow *but I welcome all s
 If you have any of those, open a Github issue for it please :)
 
 # Installation
+
 ## Make your Wii homebrew-ready
+To run homebrew on the Wii you have to [install the Homebrew channel](http://www.wiibrew.org/wiki/Homebrew_Channel#Installation) or a mod chip.
+
 ## Install the game
+1. Get an SD card
+2. Create a folder called "apps" directly on the card
+3. Copy the contents of this repository on an SD-Card into a new folder called "Spaaace" inside the "apps" folder.
+4. You rename the ``spaaace.dol`` file into ``boot.dol``
+
+In the end you should have the following folder structure on your SD card:
+
+```
+/apps/
+/apps/Spaaace
+/apps/Spaaace/images/
+/apps/Spaaace/boot.dol
+```
