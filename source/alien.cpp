@@ -6,10 +6,26 @@ Alien::Alien(wsp::Image *img) {
 	resetPosition();
 }
 
+void Alien::setShots(Shot **shots) {
+	this->shots = shots;
+}
+
 void Alien::update() {
 	Move(motionX, motionY);
 	if(GetY() < 0) SetY(0);
 	else if(GetY() > 480-GetHeight()) SetY(480-GetHeight());
+
+	int i;
+	for(i=0;i<NUM_SHOTS;i++) {
+		if(shots[i]->isFired() == false) continue;
+		
+		if(CollidesWith(shots[i])) {
+			shots[i]->remove();
+			resetPosition();
+			resetMotion();
+			break;
+		}
+	}
 	
 	if(--lockMotionFrames == 0) resetMotion();
 	if(GetX() < 0) resetPosition();
