@@ -11,7 +11,7 @@
 #define NUM_ALIENS 		 	10
 #define NUM_ALIEN_TYPES  	 1
 #define NUM_PLAYERS 	 	 2
-#define NUM_SHOTS			50
+#define NUM_SHOTS			15
 #define NUM_SPACE_BGS		 4
 
 typedef struct {
