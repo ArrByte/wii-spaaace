@@ -32,7 +32,7 @@ void Alien::update() {
 }
 
 void Alien::resetMotion() {
-	motionX = -2;
+	motionX = -4;
 	motionY = rand()%10 - 5;	
 	lockMotionFrames = Alien::LOCK_MOTION_FRAME_COUNT;
 }
