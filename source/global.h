@@ -12,7 +12,7 @@
 #define NUM_ALIEN_TYPES  	 1
 #define NUM_PLAYERS 	 	 2
 #define NUM_SHOTS			50
-#define NUM_SPACE_BGS		 3
+#define NUM_SPACE_BGS		 4
 
 typedef struct {
     wsp::Quad left;
@@ -21,12 +21,14 @@ typedef struct {
     wsp::Quad bottom;
 } bounds_t;
 
-extern wsp::GameWindow     gwd;
-extern wsp::Image          imgPlayers[NUM_PLAYERS];
-extern wsp::Image          imgAliens[NUM_ALIEN_TYPES];
-extern wsp::Image		   imgBgs[NUM_SPACE_BGS];
-extern wsp::LayerManager   manager;
-extern wsp::LayerManager   bgManager;
-extern bounds_t	    	   bounds;
+extern wsp::GameWindow     	gwd;
+extern wsp::Image          	imgPlayers[NUM_PLAYERS];
+extern wsp::Image          	imgAliens[NUM_ALIEN_TYPES];
+extern wsp::Image		   	imgBgs[NUM_SPACE_BGS];
+extern wsp::Image		   	bullet;
+extern wsp::LayerManager   	manager;
+extern wsp::LayerManager   	bgManager;
+extern int					shotsFired;
+extern bounds_t	    	   	bounds;
 
 #endif
