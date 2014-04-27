@@ -8,7 +8,7 @@
 #include <wiisprite.h>
 #include <fat.h>
 
-#define NUM_ALIENS 		 	 5
+#define NUM_ALIENS 		 	10
 #define NUM_ALIEN_TYPES  	 1
 #define NUM_PLAYERS 	 	 2
 #define NUM_SHOTS			50
