@@ -1,19 +1,26 @@
 #include "player.h"
 #include "alien.h"
+#include "shot.h"
 #include "global.h"
 
 using namespace wsp;
 
 Player players[NUM_PLAYERS];
 Alien *aliens[NUM_ALIENS];
+Shot *shots[NUM_SHOTS];
 wsp::Sprite bgs[NUM_SPACE_BGS];
 
 void initBackgrounds()
 {
-	if(imgBgs[0].LoadImage("/apps/Spaaace/images/space1.png") != IMG_LOAD_ERROR_NONE) exit(1);
-	bgs[0].SetImage(&imgBgs[0]);
-	bgs[0].SetPosition(0, 0);
-	manager.Append(&bgs[0]);
+	int i=0;
+	for(int i=0;i<NUM_SPACE_BGS;i++) {
+		char path[256];
+		sprintf(path, "/apps/Spaaace/images/space-%i.png", i%2);
+		if(imgBgs[i].LoadImage((const char *)path) != IMG_LOAD_ERROR_NONE) exit(1);
+		bgs[i].SetImage(&imgBgs[i], 640, 480);
+		bgs[i].SetPosition(i*640, 0);
+		manager.Append(&bgs[i]);
+	}
 }
 
 void initBoundaries() {
@@ -41,6 +48,7 @@ void loadPlayerSprites() {
         if(imgPlayers[i].LoadImage(imgPaths[i]) != IMG_LOAD_ERROR_NONE) exit(1);
         players[i].SetImage(&imgPlayers[i]);
         players[i].SetPosition(100, 100);
+        players[i].setShots((Shot **)&shots);
         manager.Append(&players[i]);
     }
 }
@@ -54,6 +62,14 @@ void initAliens(unsigned int maxAliens) {
 	}
 }
 
+void initShots() {
+	if(bullet.LoadImage("/apps/Spaaace/images/bullet.png") != IMG_LOAD_ERROR_NONE) exit(1);
+	int i;
+	for(i=0;i<NUM_SHOTS;i++) {
+		shots[i] = new Shot(&bullet, -100, -100);
+		manager.Append(shots[i]);
+	}
+}
 
 int main(int argc, char **argv) {
     gwd.InitVideo();
@@ -62,6 +78,7 @@ int main(int argc, char **argv) {
     fatInitDefault();
     WPAD_Init();
 
+	initShots();
     loadPlayerSprites();
     initBoundaries();
 	initAliens(NUM_ALIENS);
@@ -78,9 +95,23 @@ int main(int argc, char **argv) {
 		}
 
         for(i=0;i<NUM_PLAYERS;i++) {
-            u32 pressed = WPAD_ButtonsHeld(i);
-            players[i].update(pressed, (wsp::Sprite **)aliens);
+            u32 held    = WPAD_ButtonsHeld(i);
+            u32 pressed = WPAD_ButtonsDown(i);
+            players[i].update(held, pressed, (wsp::Sprite **)aliens);
         }
+        
+        for(i=0;i<NUM_SHOTS;i++) {
+			//if(shots[i]->isFired() == false) continue;
+			
+			shots[i]->update();
+		}
+
+		for(i=0;i<NUM_SPACE_BGS;i++) {
+			bgs[i].Move(-1, 0);
+			if(bgs[i].GetX() < -640) {
+				bgs[i].SetPosition(1920, 0);
+			}
+		}
 
         manager.Draw(0,0);
         gwd.Flush();
