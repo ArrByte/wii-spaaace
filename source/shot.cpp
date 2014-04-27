@@ -16,6 +16,11 @@ void Shot::fire(int x, int y, short direction) {
 	this->direction = direction;
 }
 
+void Shot::remove() {
+	fired = false;
+	SetPosition(-100, -100);
+}
+
 void Shot::update() {
 	if(fired == false) return;	
 	Move(direction, 0);

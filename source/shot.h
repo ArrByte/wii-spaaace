@@ -9,6 +9,7 @@ class Shot : public wsp::Sprite {
 		void update();
 		bool isFired();
 		void fire(int x, int y, short direction);
+		void remove();
 	private:
 		bool fired;
 		short direction;
