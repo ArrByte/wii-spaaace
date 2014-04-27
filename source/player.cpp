@@ -1,6 +1,6 @@
 #include "player.h"
 
-void Player::update(u32 buttonsHeld, wsp::Sprite **enemies) {
+void Player::update(u32 buttonsHeld, u32 buttonsPressed, wsp::Sprite **enemies) {
 	if(buttonsHeld & WPAD_BUTTON_RIGHT && !CollidesWith(bounds.top.GetRectangle())) {
 		Move(0, -5);
 	} else if(buttonsHeld & WPAD_BUTTON_LEFT && !CollidesWith(bounds.bottom.GetRectangle())) {
@@ -13,8 +13,15 @@ void Player::update(u32 buttonsHeld, wsp::Sprite **enemies) {
 		Move(2, 0);
 	}
 
-	if(buttonsHeld & WPAD_BUTTON_2) {
-		//Shoot?
+	if(buttonsPressed & WPAD_BUTTON_2) {
+		int i;
+		for(i=0;i<NUM_SHOTS;i++) {
+			if(shots[i]->isFired() == false) {
+				shotsFired++;
+				shots[i]->fire(GetX() + GetWidth(), GetY() + (GetHeight()/2), 2);
+				break;
+			}
+		}
 	}
 	
 	int i=0;
@@ -24,7 +31,9 @@ void Player::update(u32 buttonsHeld, wsp::Sprite **enemies) {
 			SetPosition(100, 100);
 			break;
 		}
-	}
+	}	
+}
 
-	
+void Player::setShots(Shot **shots) {
+	this->shots = shots;
 }
