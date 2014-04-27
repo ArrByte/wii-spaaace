@@ -18,7 +18,7 @@ void Player::update(u32 buttonsHeld, u32 buttonsPressed, wsp::Sprite **enemies) 
 		for(i=0;i<NUM_SHOTS;i++) {
 			if(shots[i]->isFired() == false) {
 				shotsFired++;
-				shots[i]->fire(GetX() + GetWidth(), GetY() + (GetHeight()/2), 2);
+				shots[i]->fire(GetX() + GetWidth(), GetY() + (GetHeight()/2), 5);
 				break;
 			}
 		}
