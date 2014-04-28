@@ -7,7 +7,7 @@ A simple side-scrolling space arcade game as Wii homebrew.
 # Current status
 Overall progress can be seen on [the Kanban board](https://waffle.io/avgp/wii-spaaace).
 Here's the latest video:  
-[![Current Wii-Spaaace demo video](https://img.youtube.com/vi/PlVWPcLCzUk/0.jpg)](https://www.youtube.com/v/PlVWPcLCzUk)
+[![Wii-Spaaace Day 3 demo video](https://img.youtube.com/vi/PFFc6h1iqBs/0.jpg)](https://www.youtube.com/v/PFFc6h1iqBs)
 
 # Contributing
 Right now this project doesn't have a contribution workflow *but I welcome all sorts of contributions, such as*:
@@ -40,3 +40,14 @@ In the end you should have the following folder structure on your SD card:
 /apps/Spaaace/images/
 /apps/Spaaace/boot.dol
 ```
+## Play!
+Insert the SD card into your Wii and start the Homebrew channel.
+Select "Spaaace" and press "A". Then press "A" on the "Load" button again - tada!
+Have fun playing!
+
+
+# History
+## Day 2
+[![Wii-Spaaace Day 2 demo video](https://img.youtube.com/vi/PlVWPcLCzUk/0.jpg)](https://www.youtube.com/v/PlVWPcLCzUk)
+## Day 1
+[![Wii-Spaaace Day 1 demo video](https://img.youtube.com/vi/ihEtvlsXUTw/0.jpg)](https://www.youtube.com/v/ihEtvlsXUTw)
