@@ -15,9 +15,9 @@ void Player::update(u32 buttonsHeld, u32 buttonsPressed, wsp::Sprite **enemies) 
 
 	if(buttonsPressed & WPAD_BUTTON_2) {
 		int i;
-		for(i=0;i<numShots;i++) {
-			if(shots[i]->isFired() == false) {
-				shots[i]->fire(GetX() + GetWidth(), GetY() + (GetHeight()/2) - 10, 5);
+		for(i=0;i<numOwnShots;i++) {
+			if(ownShots[i]->isFired() == false) {
+				ownShots[i]->fire(GetX() + GetWidth(), GetY() + (GetHeight()/2) - 10, 5);
 				break;
 			}
 		}
@@ -31,9 +31,25 @@ void Player::update(u32 buttonsHeld, u32 buttonsPressed, wsp::Sprite **enemies) 
 			break;
 		}
 	}	
+
+	for(i=0;i<numEnemyShots;i++) {
+		if(enemyShots[i]->isFired() == false) continue;
+		
+		if(CollidesWith(enemyShots[i])) {
+			// TODO: Mark player "dead", play explosion anim&sound, respawn in a neat way
+			SetPosition(100, 100);
+			break;
+		}
+	}
+	
 }
 
-void Player::setShots(Shot **shots, unsigned int numberOfShots) {
-	this->shots = shots;
-	numShots = numberOfShots;
+void Player::setShots(Shot **shots, unsigned int numberOfShots, bool isOwn) {
+	if(isOwn) {
+		ownShots = shots;
+		numOwnShots = numberOfShots;
+	} else {
+		enemyShots = shots;
+		numEnemyShots = numberOfShots;		
+	}
 }
