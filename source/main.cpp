@@ -61,7 +61,7 @@ void initAliens(unsigned int maxAliens) {
 	int i;
 	for(i=0;i<maxAliens;i++) {
 		aliens[i] = new Alien(&imgAliens[0]);
-        aliens[i]->setShots((Shot **)&playerShots, NUM_SHOTS_PLAYERS);
+        aliens[i]->setShots((Shot **)&playerShots, NUM_SHOTS_PLAYERS, false);
 		manager.Append(aliens[i]);
 	}
 }

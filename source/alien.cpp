@@ -7,9 +7,14 @@ Alien::Alien(wsp::Image *img) {
 	resetPosition();
 }
 
-void Alien::setShots(Shot **shots, unsigned int numberOfShots) {
-	this->shots = shots;
-	numShots = numberOfShots;
+void Alien::setShots(Shot **shots, unsigned int numberOfShots, bool isOwn) {
+	if(isOwn) {
+		ownShots = shots;
+		numOwnShots = numberOfShots;
+	} else {
+		enemyShots = shots;
+		numEnemyShots = numberOfShots;		
+	}
 }
 
 void Alien::update() {
@@ -24,11 +29,11 @@ void Alien::update() {
 	}
 	
 	int i;
-	for(i=0;i<numShots;i++) {
-		if(shots[i]->isFired() == false) continue;
+	for(i=0;i<numEnemyShots;i++) {
+		if(enemyShots[i]->isFired() == false) continue;
 		
-		if(CollidesWith(shots[i])) {
-			shots[i]->remove();
+		if(CollidesWith(enemyShots[i])) {
+			enemyShots[i]->remove();
 			resetPosition();
 			resetMotion();
 			break;
