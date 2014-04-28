@@ -10,11 +10,11 @@
 #include <asndlib.h>
 #include <mp3player.h>
 
-#define NUM_ALIENS 		 	10
+#define NUM_ALIENS 		 	 6
 #define NUM_ALIEN_TYPES  	 1
 #define NUM_PLAYERS 	 	 2
-#define NUM_SHOTS_PLAYERS	10
-#define NUM_SHOTS_ALIENS	10
+#define NUM_SHOTS_PLAYERS	12
+#define NUM_SHOTS_ALIENS	 6
 #define NUM_SPACE_BGS		 4
 
 typedef struct {
