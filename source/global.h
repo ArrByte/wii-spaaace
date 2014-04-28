@@ -23,6 +23,8 @@ typedef struct {
     wsp::Quad bottom;
 } bounds_t;
 
+extern s32  my_reader(void *fp,void *dat, s32 size);
+
 extern wsp::GameWindow     	gwd;
 extern wsp::Image          	imgPlayers[NUM_PLAYERS];
 extern wsp::Image          	imgAliens[NUM_ALIEN_TYPES];
