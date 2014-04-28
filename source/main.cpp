@@ -48,6 +48,8 @@ void loadPlayerSprites() {
         if(imgPlayers[i].LoadImage(imgPaths[i]) != IMG_LOAD_ERROR_NONE) exit(1);
         players[i].SetImage(&imgPlayers[i]);
         players[i].SetPosition(100, 100);
+        if(i == 0) players[i].DefineCollisionRectangle(0, 2, 58, 76);
+        else 	   players[i].DefineCollisionRectangle(6, 6, 62, 69);
         players[i].setShots((Shot **)&shots);
         manager.Append(&players[i]);
     }

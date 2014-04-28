@@ -2,6 +2,7 @@
 
 Alien::Alien(wsp::Image *img) {
 	SetImage(img);
+	DefineCollisionRectangle(28, 14, 42, 55);
 	resetMotion();
 	resetPosition();
 }
