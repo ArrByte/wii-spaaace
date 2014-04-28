@@ -51,3 +51,9 @@ Have fun playing!
 [![Wii-Spaaace Day 2 demo video](https://img.youtube.com/vi/PlVWPcLCzUk/0.jpg)](https://www.youtube.com/v/PlVWPcLCzUk)
 ## Day 1
 [![Wii-Spaaace Day 1 demo video](https://img.youtube.com/vi/ihEtvlsXUTw/0.jpg)](https://www.youtube.com/v/ihEtvlsXUTw)
+
+# Attribution, Contributors & awesome folks
+
+## Graphics
+Graphics by bloodelf.sephis
+Music: ["Be not put out from a window during a hyperspatial jump"](http://opengameart.org/content/be-not-put-out-from-a-window-during-a-hyperspatial-jump#comment-28449) by [Alexandr Zhelanov](https://soundcloud.com/alexandr-zhelanov)
