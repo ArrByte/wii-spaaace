@@ -51,7 +51,8 @@ void loadPlayerSprites() {
         players[i].SetPosition(100, 100);
         if(i == 0) players[i].DefineCollisionRectangle(0, 2, 58, 76);
         else 	   players[i].DefineCollisionRectangle(6, 6, 62, 69);
-        players[i].setShots((Shot **)&playerShots, NUM_SHOTS_PLAYERS);
+        players[i].setShots((Shot **)&playerShots, NUM_SHOTS_PLAYERS, true);
+        players[i].setShots((Shot **)&alienShots,  NUM_SHOTS_ALIENS,  false);
         manager.Append(&players[i]);
     }
 }
