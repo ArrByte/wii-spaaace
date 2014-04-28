@@ -7,6 +7,8 @@
 #include <wiiuse/wpad.h>
 #include <wiisprite.h>
 #include <fat.h>
+#include <asndlib.h>
+#include <mp3player.h>
 
 #define NUM_ALIENS 		 	10
 #define NUM_ALIEN_TYPES  	 1
