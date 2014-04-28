@@ -5,6 +5,7 @@ Alien::Alien(wsp::Image *img) {
 	DefineCollisionRectangle(28, 14, 42, 55);
 	resetMotion();
 	resetPosition();
+	resetShotCountdown();
 }
 
 void Alien::setShots(Shot **shots, unsigned int numberOfShots, bool isOwn) {
@@ -36,12 +37,23 @@ void Alien::update() {
 			enemyShots[i]->remove();
 			resetPosition();
 			resetMotion();
+			resetShotCountdown();
 			break;
 		}
 	}
 	
-	if(--lockMotionFrames == 0) resetMotion();
+	if(--lockMotionFrames == 0) resetMotion();	
 	if(GetX() < 0) resetPosition();
+	if(--nextShotCountdown == 0) {
+		resetShotCountdown();
+		for(i=0;i<numOwnShots;i++) {
+			if(ownShots[i]->isFired() == false) {
+				ownShots[i]->fire(GetX(), GetY() + (GetHeight() / 2) - 10, -6);
+				break;
+			}
+		}
+	}
+
 }
 
 void Alien::resetMotion() {
@@ -52,6 +64,10 @@ void Alien::resetMotion() {
 
 void Alien::resetPosition() {
 	SetPosition(640 + (rand()%Alien::MAX_OFFSCREEN_OFFSET), rand() % (480-GetHeight()));
+}
+
+void Alien::resetShotCountdown() {
+	nextShotCountdown = 80 + rand()%41;
 }
 
 const int Alien::MAX_OFFSCREEN_OFFSET 		= 640;
