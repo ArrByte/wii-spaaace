@@ -79,16 +79,30 @@ int main(int argc, char **argv) {
     fatInitDefault();
     WPAD_Init();
 
+    ASND_Init();
+    MP3Player_Init();
+	MP3Player_Volume(255);
+	ASND_Pause(0);
+	
 	initShots();
     loadPlayerSprites();
     initBoundaries();
 	initAliens(NUM_ALIENS);
     initBackgrounds();
 
+	FILE *musicFile = fopen("/apps/Spaaace/sample.mp3", "r");
+	if(musicFile == NULL) {
+		ASND_End();
+		exit(1);
+	}
+
+	MP3Player_PlayFile((void *)musicFile, my_reader, NULL);
+
     while(true) {
         WPAD_ScanPads();
 
         if(WPAD_ButtonsDown(WPAD_CHAN_0) & WPAD_BUTTON_HOME) break;
+        
         int i;
 
 		for(i=0;i<NUM_ALIENS;i++) {
@@ -102,8 +116,6 @@ int main(int argc, char **argv) {
         }
         
         for(i=0;i<NUM_SHOTS;i++) {
-			//if(shots[i]->isFired() == false) continue;
-			
 			shots[i]->update();
 		}
 
@@ -117,5 +129,9 @@ int main(int argc, char **argv) {
         manager.Draw(0,0);
         gwd.Flush();
     }
+
+    MP3Player_Stop();
+    if(musicFile != NULL) fclose(musicFile);
+
     return 0;
 }
