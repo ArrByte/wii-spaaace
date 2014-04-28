@@ -7,6 +7,8 @@
 #include <wiiuse/wpad.h>
 #include <wiisprite.h>
 #include <fat.h>
+#include <asndlib.h>
+#include <mp3player.h>
 
 #define NUM_ALIENS 		 	10
 #define NUM_ALIEN_TYPES  	 1
@@ -20,6 +22,8 @@ typedef struct {
     wsp::Quad right;
     wsp::Quad bottom;
 } bounds_t;
+
+extern s32  my_reader(void *fp,void *dat, s32 size);
 
 extern wsp::GameWindow     	gwd;
 extern wsp::Image          	imgPlayers[NUM_PLAYERS];
