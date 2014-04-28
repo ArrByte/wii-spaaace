@@ -7,9 +7,10 @@
 class Player : public wsp::Sprite {
 	public:
 		void update(u32 buttonsHeld, u32 buttonsPressed, wsp::Sprite **enemies);
-		void setShots(Shot **shots);
+		void setShots(Shot **shots, unsigned int numberOfShots);
 	private:
 		Shot **shots;
+		unsigned int numShots;
 };
 
 #endif

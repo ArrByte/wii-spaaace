@@ -7,7 +7,8 @@ using namespace wsp;
 
 Player players[NUM_PLAYERS];
 Alien *aliens[NUM_ALIENS];
-Shot *shots[NUM_SHOTS];
+Shot *playerShots[NUM_SHOTS_PLAYERS];
+Shot *alienShots[NUM_SHOTS_ALIENS];
 wsp::Sprite bgs[NUM_SPACE_BGS];
 
 void initBackgrounds()
@@ -50,7 +51,7 @@ void loadPlayerSprites() {
         players[i].SetPosition(100, 100);
         if(i == 0) players[i].DefineCollisionRectangle(0, 2, 58, 76);
         else 	   players[i].DefineCollisionRectangle(6, 6, 62, 69);
-        players[i].setShots((Shot **)&shots);
+        players[i].setShots((Shot **)&playerShots, NUM_SHOTS_PLAYERS);
         manager.Append(&players[i]);
     }
 }
@@ -60,17 +61,23 @@ void initAliens(unsigned int maxAliens) {
 	int i;
 	for(i=0;i<maxAliens;i++) {
 		aliens[i] = new Alien(&imgAliens[0]);
-        aliens[i]->setShots((Shot **)&shots);
+        aliens[i]->setShots((Shot **)&playerShots, NUM_SHOTS_PLAYERS);
 		manager.Append(aliens[i]);
 	}
 }
 
 void initShots() {
-	if(bullet.LoadImage("/apps/Spaaace/images/bullet.png") != IMG_LOAD_ERROR_NONE) exit(1);
+	if(imgPlayerBullet.LoadImage("/apps/Spaaace/images/bullet.png") != IMG_LOAD_ERROR_NONE) exit(1);
+	if(imgAlienBullet.LoadImage("/apps/Spaaace/images/bullet_enemy.png") != IMG_LOAD_ERROR_NONE) exit(1);
 	int i;
-	for(i=0;i<NUM_SHOTS;i++) {
-		shots[i] = new Shot(&bullet, -100, -100);
-		manager.Append(shots[i]);
+	for(i=0;i<NUM_SHOTS_PLAYERS;i++) {
+		playerShots[i] = new Shot(&imgPlayerBullet, -100, -100);
+		manager.Append(playerShots[i]);
+	}
+	
+	for(i=0;i<NUM_SHOTS_ALIENS;i++) {
+		alienShots[i] = new Shot(&imgAlienBullet, -100, -100);
+		manager.Append(alienShots[i]);
 	}
 }
 
@@ -116,8 +123,8 @@ int main(int argc, char **argv) {
             players[i].update(held, pressed, (wsp::Sprite **)aliens);
         }
         
-        for(i=0;i<NUM_SHOTS;i++) {
-			shots[i]->update();
+        for(i=0;i<NUM_SHOTS_PLAYERS;i++) {
+			playerShots[i]->update();
 		}
 
 		for(i=0;i<NUM_SPACE_BGS;i++) {

@@ -15,9 +15,8 @@ void Player::update(u32 buttonsHeld, u32 buttonsPressed, wsp::Sprite **enemies) 
 
 	if(buttonsPressed & WPAD_BUTTON_2) {
 		int i;
-		for(i=0;i<NUM_SHOTS;i++) {
+		for(i=0;i<numShots;i++) {
 			if(shots[i]->isFired() == false) {
-				shotsFired++;
 				shots[i]->fire(GetX() + GetWidth(), GetY() + (GetHeight()/2) - 10, 5);
 				break;
 			}
@@ -34,6 +33,7 @@ void Player::update(u32 buttonsHeld, u32 buttonsPressed, wsp::Sprite **enemies) 
 	}	
 }
 
-void Player::setShots(Shot **shots) {
+void Player::setShots(Shot **shots, unsigned int numberOfShots) {
 	this->shots = shots;
+	numShots = numberOfShots;
 }

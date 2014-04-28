@@ -7,8 +7,9 @@ Alien::Alien(wsp::Image *img) {
 	resetPosition();
 }
 
-void Alien::setShots(Shot **shots) {
+void Alien::setShots(Shot **shots, unsigned int numberOfShots) {
 	this->shots = shots;
+	numShots = numberOfShots;
 }
 
 void Alien::update() {
@@ -23,7 +24,7 @@ void Alien::update() {
 	}
 	
 	int i;
-	for(i=0;i<NUM_SHOTS;i++) {
+	for(i=0;i<numShots;i++) {
 		if(shots[i]->isFired() == false) continue;
 		
 		if(CollidesWith(shots[i])) {

@@ -13,7 +13,8 @@
 #define NUM_ALIENS 		 	10
 #define NUM_ALIEN_TYPES  	 1
 #define NUM_PLAYERS 	 	 2
-#define NUM_SHOTS			15
+#define NUM_SHOTS_PLAYERS	10
+#define NUM_SHOTS_ALIENS	10
 #define NUM_SPACE_BGS		 4
 
 typedef struct {
@@ -29,10 +30,10 @@ extern wsp::GameWindow     	gwd;
 extern wsp::Image          	imgPlayers[NUM_PLAYERS];
 extern wsp::Image          	imgAliens[NUM_ALIEN_TYPES];
 extern wsp::Image		   	imgBgs[NUM_SPACE_BGS];
-extern wsp::Image		   	bullet;
+extern wsp::Image		   	imgPlayerBullet;
+extern wsp::Image		   	imgAlienBullet;
 extern wsp::LayerManager   	manager;
 extern wsp::LayerManager   	bgManager;
-extern int					shotsFired;
 extern bounds_t	    	   	bounds;
 
 #endif
