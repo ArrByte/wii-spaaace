@@ -129,6 +129,10 @@ int main(int argc, char **argv) {
 			playerShots[i]->update();
 		}
 
+        for(i=0;i<NUM_SHOTS_ALIENS;i++) {
+			alienShots[i]->update();
+		}
+
 		for(i=0;i<NUM_SPACE_BGS;i++) {
 			bgs[i].Move(-1, 0);
 			if(bgs[i].GetX() < -640) {
