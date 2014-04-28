@@ -90,21 +90,20 @@ int main(int argc, char **argv) {
 	initAliens(NUM_ALIENS);
     initBackgrounds();
 
-	FILE *musicFile = fopen("/apps/Spaaace/sample.mp3", "r");
+	FILE *musicFile = NULL;
+	musicFile = fopen("/apps/Spaaace/space.mp3", "r");
 	if(musicFile == NULL) {
 		ASND_End();
 		exit(1);
-	}
-
+		}
 	MP3Player_PlayFile((void *)musicFile, my_reader, NULL);
-
+	
     while(true) {
         WPAD_ScanPads();
 
-        if(WPAD_ButtonsDown(WPAD_CHAN_0) & WPAD_BUTTON_HOME) break;
+        if(WPAD_ButtonsDown(WPAD_CHAN_0) & WPAD_BUTTON_HOME) break;        
         
         int i;
-
 		for(i=0;i<NUM_ALIENS;i++) {
 			aliens[i]->update();
 		}
