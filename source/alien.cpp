@@ -13,9 +13,15 @@ void Alien::setShots(Shot **shots) {
 
 void Alien::update() {
 	Move(motionX, motionY);
-	if(GetY() < 0) SetY(0);
-	else if(GetY() > 480-GetHeight()) SetY(480-GetHeight());
-
+	if(GetY() < 0) {
+		SetY(0);
+		resetMotion();
+	}
+	else if(GetY() > 480-GetHeight()) {
+		SetY(480-GetHeight());
+		resetMotion();
+	}
+	
 	int i;
 	for(i=0;i<NUM_SHOTS;i++) {
 		if(shots[i]->isFired() == false) continue;
