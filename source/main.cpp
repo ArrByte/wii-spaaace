@@ -151,12 +151,16 @@ int main(int argc, char **argv) {
 			drawString("player 2 a to join", 106, 254);
 			gwd.Flush();
 
+			if(WPAD_ButtonsDown(WPAD_CHAN_0) & WPAD_BUTTON_HOME) break;        
+
 			if(WPAD_ButtonsDown(WPAD_CHAN_1) & WPAD_BUTTON_A) {
 				numPlayers++;
 				players[1].SetPosition(100, 100);
 			}
 			
 			if(WPAD_ButtonsDown(WPAD_CHAN_0) & WPAD_BUTTON_A) {
+				score = 0;
+				lifes = 10;
 				inGame = true;
 			}			
 			
