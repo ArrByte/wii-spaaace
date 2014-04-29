@@ -7,7 +7,7 @@ A simple side-scrolling space arcade game as Wii homebrew.
 # Current status
 Overall progress can be seen on [the Kanban board](https://waffle.io/avgp/wii-spaaace).
 Here's the latest video:  
-[![Wii-Spaaace Day 3 demo video](https://img.youtube.com/vi/PFFc6h1iqBs/0.jpg)](https://www.youtube.com/v/PFFc6h1iqBs)
+[![Wii-Spaaace Day 4 demo video](https://img.youtube.com/vi/GbNrHlBSbyA/0.jpg)](https://www.youtube.com/v/GbNrHlBSbyA)
 
 # Contributing
 Right now this project doesn't have a contribution workflow *but I welcome all sorts of contributions, such as*:
@@ -47,6 +47,8 @@ Have fun playing!
 
 
 # History
+## Day 3
+[![Wii-Spaaace Day 3 demo video](https://img.youtube.com/vi/PFFc6h1iqBs/0.jpg)](https://www.youtube.com/v/PFFc6h1iqBs)
 ## Day 2
 [![Wii-Spaaace Day 2 demo video](https://img.youtube.com/vi/PlVWPcLCzUk/0.jpg)](https://www.youtube.com/v/PlVWPcLCzUk)
 ## Day 1
@@ -55,5 +57,5 @@ Have fun playing!
 # Attribution, Contributors & awesome folks
 
 ## Graphics
-Graphics by bloodelf.sephis
+Graphics by [Tallicatty](http://tallicatty.tumblr.com/)
 Music: ["Be not put out from a window during a hyperspatial jump"](http://opengameart.org/content/be-not-put-out-from-a-window-during-a-hyperspatial-jump#comment-28449) by [Alexandr Zhelanov](https://soundcloud.com/alexandr-zhelanov)
