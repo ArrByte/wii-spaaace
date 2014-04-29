@@ -38,6 +38,7 @@ void Alien::update() {
 			resetPosition();
 			resetMotion();
 			resetShotCountdown();
+			score++;
 			break;
 		}
 	}
