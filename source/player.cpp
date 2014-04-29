@@ -27,20 +27,20 @@ void Player::update(u32 buttonsHeld, u32 buttonsPressed, wsp::Sprite **enemies) 
 		}
 	}
 	
-	int i=0;
-	for(i=0;i<NUM_ALIENS;i++) {
-		if(CollidesWith(enemies[i])) {
-			startRespawn();
-			break;
-		}
-	}	
-
 	if(respawningCountdown == 0) {
+		int i=0;
+		for(i=0;i<NUM_ALIENS;i++) {
+			if(CollidesWith(enemies[i])) {
+				startRespawn();
+				break;
+			}
+		}
+
 		for(i=0;i<numEnemyShots;i++) {
 			if(enemyShots[i]->isFired() == false) continue;
 		
-			if(CollidesWith(enemyShots[i])) {
-				startRespawn()
+			if(CollidesWith(enemyShots[i]) && respawningCountdown == 0) {
+				startRespawn();
 				break;
 			}
 		}
@@ -61,6 +61,8 @@ void Player::setShots(Shot **shots, unsigned int numberOfShots, bool isOwn) {
 }
 
 void Player::startRespawn() {
+	if(respawningCountdown > 0) return;
+	lifes--;
 	SetTransparency(127);
 	respawningCountdown = RESPAWN_TIME;
 }
