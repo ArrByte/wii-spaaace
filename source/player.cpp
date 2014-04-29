@@ -1,5 +1,9 @@
 #include "player.h"
 
+Player::Player() {
+	respawningCountdown = 0;
+}
+
 void Player::update(u32 buttonsHeld, u32 buttonsPressed, wsp::Sprite **enemies) {
 	if(buttonsHeld & WPAD_BUTTON_RIGHT && !CollidesWith(bounds.top.GetRectangle())) {
 		Move(0, -5);
@@ -13,7 +17,7 @@ void Player::update(u32 buttonsHeld, u32 buttonsPressed, wsp::Sprite **enemies) 
 		Move(2, 0);
 	}
 
-	if(buttonsPressed & WPAD_BUTTON_2) {
+	if(buttonsPressed & WPAD_BUTTON_2 && respawningCountdown == 0) {
 		int i;
 		for(i=0;i<numOwnShots;i++) {
 			if(ownShots[i]->isFired() == false) {
@@ -26,20 +30,22 @@ void Player::update(u32 buttonsHeld, u32 buttonsPressed, wsp::Sprite **enemies) 
 	int i=0;
 	for(i=0;i<NUM_ALIENS;i++) {
 		if(CollidesWith(enemies[i])) {
-			// TODO: Mark player "dead", play explosion anim&sound, respawn in a neat way
-			SetPosition(100, 100);
+			startRespawn();
 			break;
 		}
 	}	
 
-	for(i=0;i<numEnemyShots;i++) {
-		if(enemyShots[i]->isFired() == false) continue;
+	if(respawningCountdown == 0) {
+		for(i=0;i<numEnemyShots;i++) {
+			if(enemyShots[i]->isFired() == false) continue;
 		
-		if(CollidesWith(enemyShots[i])) {
-			// TODO: Mark player "dead", play explosion anim&sound, respawn in a neat way
-			SetPosition(100, 100);
-			break;
+			if(CollidesWith(enemyShots[i])) {
+				startRespawn()
+				break;
+			}
 		}
+	} else {
+		if(--respawningCountdown == 0) stopRespawn();
 	}
 	
 }
@@ -52,4 +58,14 @@ void Player::setShots(Shot **shots, unsigned int numberOfShots, bool isOwn) {
 		enemyShots = shots;
 		numEnemyShots = numberOfShots;		
 	}
+}
+
+void Player::startRespawn() {
+	SetTransparency(127);
+	respawningCountdown = RESPAWN_TIME;
+}
+
+void Player::stopRespawn() {
+	respawningCountdown = 0;
+	SetTransparency(255);
 }
