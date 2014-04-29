@@ -83,6 +83,31 @@ void initShots() {
 	}
 }
 
+void initFont() {
+	if(imgFont.LoadImage("/apps/Spaaace/images/font.png") != IMG_LOAD_ERROR_NONE) exit(1);
+	font.SetImage(&imgFont, 25, 24);
+}
+
+void drawNumber(int number, int x, int y) {
+	char str[20];
+	int i;
+	sprintf(str, "%i", number);
+	for(i=0;i<strlen(str);i++) {
+		font.SetFrame(26 + str[i] - 48);
+		font.Draw(x + i*26, y);
+	}
+}
+
+void drawString(char *str, int x, int y) {
+	int i;
+	for(i=0;i<strlen(str);i++) {
+		if(str[i] == ' ') continue;
+		if(str[i] <= '9') font.SetFrame(26 + str[i] - 48);
+		else font.SetFrame(str[i] - 97);
+		font.Draw(x + i*26, y);
+	}
+}
+
 int main(int argc, char **argv) {
     gwd.InitVideo();
     gwd.SetBackground((GXColor){ 0, 0, 0, 255 });
@@ -94,7 +119,7 @@ int main(int argc, char **argv) {
     MP3Player_Init();
 	MP3Player_Volume(255);
 	ASND_Pause(0);
-	
+	initFont();
 	initShots();
     loadPlayerSprites();
     initBoundaries();
@@ -109,17 +134,41 @@ int main(int argc, char **argv) {
 		}
 	MP3Player_PlayFile((void *)musicFile, my_reader, NULL);
 	
+	bool inGame = false;
+	
     while(true) {
         WPAD_ScanPads();
 
         if(WPAD_ButtonsDown(WPAD_CHAN_0) & WPAD_BUTTON_HOME) break;        
+        
+        if(!inGame) {
+			numPlayers = 1;
+			players[1].SetPosition(-300, -300);
+			if(lifes <= 0) {
+				drawString("game over", 223, 202);
+			}
+			drawString("player 1 a to start", 93, 228);
+			drawString("player 2 a to join", 106, 254);
+			gwd.Flush();
+
+			if(WPAD_ButtonsDown(WPAD_CHAN_1) & WPAD_BUTTON_A) {
+				numPlayers++;
+				players[1].SetPosition(100, 100);
+			}
+			
+			if(WPAD_ButtonsDown(WPAD_CHAN_0) & WPAD_BUTTON_A) {
+				inGame = true;
+			}			
+			
+			continue;
+		}
         
         int i;
 		for(i=0;i<NUM_ALIENS;i++) {
 			aliens[i]->update();
 		}
 
-        for(i=0;i<NUM_PLAYERS;i++) {
+        for(i=0;i<numPlayers;i++) {
             u32 held    = WPAD_ButtonsHeld(i);
             u32 pressed = WPAD_ButtonsDown(i);
             players[i].update(held, pressed, (wsp::Sprite **)aliens);
@@ -127,6 +176,7 @@ int main(int argc, char **argv) {
         
         for(i=0;i<NUM_SHOTS_PLAYERS;i++) {
 			playerShots[i]->update();
+			if(lifes <= 0) inGame = false; 
 		}
 
         for(i=0;i<NUM_SHOTS_ALIENS;i++) {
@@ -141,7 +191,12 @@ int main(int argc, char **argv) {
 		}
 
         manager.Draw(0,0);
-        gwd.Flush();
+        drawString("score", 0, 0);
+		drawNumber(score, 156, 0);
+
+        drawString("ships x", 380, 0);
+		drawNumber(lifes, 562, 0);
+		gwd.Flush();	
     }
 
     MP3Player_Stop();
