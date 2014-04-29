@@ -2,6 +2,7 @@
 #define GLOBAL_H
 
 #include <stdio.h>
+#include <math.h>
 #include <stdlib.h>
 #include <gccore.h>
 #include <wiiuse/wpad.h>
@@ -32,8 +33,13 @@ extern wsp::Image          	imgAliens[NUM_ALIEN_TYPES];
 extern wsp::Image		   	imgBgs[NUM_SPACE_BGS];
 extern wsp::Image		   	imgPlayerBullet;
 extern wsp::Image		   	imgAlienBullet;
+extern wsp::Image			imgFont;
+extern wsp::Sprite			font;
 extern wsp::LayerManager   	manager;
 extern wsp::LayerManager   	bgManager;
 extern bounds_t	    	   	bounds;
+extern int					score;
+extern int					lifes;
+extern int					numPlayers;
 
 #endif
