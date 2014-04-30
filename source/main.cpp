@@ -135,6 +135,8 @@ int main(int argc, char **argv) {
 	MP3Player_PlayFile((void *)musicFile, my_reader, NULL);
 	
 	bool inGame = false;
+	players[1].SetPosition(-300, -300);
+	numPlayers = 1;
 	
     while(true) {
         WPAD_ScanPads();
@@ -142,19 +144,20 @@ int main(int argc, char **argv) {
         if(WPAD_ButtonsDown(WPAD_CHAN_0) & WPAD_BUTTON_HOME) break;        
         
         if(!inGame) {
-			numPlayers = 1;
-			players[1].SetPosition(-300, -300);
 			if(lifes <= 0) {
 				drawString("game over", 223, 202);
+
 			}
 			drawString("player 1 a to start", 93, 228);
-			drawString("player 2 a to join", 106, 254);
+			if(numPlayers == 1) drawString("player 2 a to join", 106, 254);
+			else drawString("player 2 ready", 158, 254);
+
 			gwd.Flush();
 
 			if(WPAD_ButtonsDown(WPAD_CHAN_0) & WPAD_BUTTON_HOME) break;        
 
 			if(WPAD_ButtonsDown(WPAD_CHAN_1) & WPAD_BUTTON_A) {
-				numPlayers++;
+				numPlayers = 2;
 				players[1].SetPosition(100, 100);
 			}
 			
