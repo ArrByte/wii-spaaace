@@ -7,7 +7,7 @@ A simple side-scrolling space arcade game as Wii homebrew.
 # Current status
 Overall progress can be seen on [the Kanban board](https://waffle.io/avgp/wii-spaaace).
 Here's the latest video:  
-[![Wii-Spaaace Day 4 demo video](https://img.youtube.com/vi/GbNrHlBSbyA/0.jpg)](https://www.youtube.com/v/GbNrHlBSbyA)
+[![Wii-Spaaace Day 5 demo video](https://img.youtube.com/vi/SoZ6xFoAWEQ/0.jpg)](https://www.youtube.com/v/SoZ6xFoAWEQ)
 
 # Contributing
 Right now this project doesn't have a contribution workflow *but I welcome all sorts of contributions, such as*:
@@ -47,6 +47,8 @@ Have fun playing!
 
 
 # History
+## Day 4
+[![Wii-Spaaace Day 4 demo video](https://img.youtube.com/vi/GbNrHlBSbyA/0.jpg)](https://www.youtube.com/v/GbNrHlBSbyA)
 ## Day 3
 [![Wii-Spaaace Day 3 demo video](https://img.youtube.com/vi/PFFc6h1iqBs/0.jpg)](https://www.youtube.com/v/PFFc6h1iqBs)
 ## Day 2
